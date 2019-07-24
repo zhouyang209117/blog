@@ -1,0 +1,28 @@
+---
+- hosts: etcd
+  gather_facts: False
+  tasks:
+    - name: delete dir if exists
+      file:
+        state: absent
+        path: /data/k8s
+    - name: create dir
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /data/k8s
+    - name: copy k8s install dir
+      copy:
+        src: /data/k8s_install/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - docker.sh
+    - name: create config
+      script: /bin/sh /data/k8s/docker.sh
+      register: info
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"

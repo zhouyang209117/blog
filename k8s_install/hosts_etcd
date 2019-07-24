@@ -1,0 +1,4 @@
+[etcd]
+v2:20021 host_alias=etcd1 host_ip=192.0.0.2 hosts_list=192.0.0.2,192.0.0.3,192.0.0.4 alias_list=etcd1,etcd2,etcd3
+v3:20021 host_alias=etcd2 host_ip=192.0.0.3 hosts_list=192.0.0.2,192.0.0.3,192.0.0.4 alias_list=etcd1,etcd2,etcd3
+v4:20021 host_alias=etcd3 host_ip=192.0.0.4 hosts_list=192.0.0.2,192.0.0.3,192.0.0.4 alias_list=etcd1,etcd2,etcd3

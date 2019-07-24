@@ -1,0 +1,45 @@
+---
+- hosts: api_server
+  gather_facts: False
+  tasks:
+    - name: delete dir if exists
+      file:
+        state: absent
+        path: /data/k8s
+    - name: create dir
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /opt/kubernetes/ssl
+    - name: exec
+      copy:
+        src: /data/k8s_install/kubernetes/server/bin/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - kube-apiserver
+        - kube-scheduler
+        - kube-controller-manager
+        - kubectl
+    - name: exec
+      copy:
+        src: /data/k8s_install/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - server.pem
+        - server-key.pem
+        - ca.pem
+        - ca-key.pem
+        - master.sh
+        - master.py
+    - name: create config
+      script: /bin/sh /data/k8s/master.sh {{hosts_list}} {{host_ip}}
+      register: info
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"

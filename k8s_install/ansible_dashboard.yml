@@ -1,0 +1,36 @@
+---
+- hosts: api_server
+  gather_facts: False
+  tasks:
+    - name: delete dir if exists
+      file:
+        state: absent
+        path: /data/k8s
+    - name: copy yaml
+      copy:
+        src: /data/k8s_install/kubernetes/kubernetes-src/cluster/addons/dashboard/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - dashboard-configmap.yaml
+        - dashboard-rbac.yaml
+        - dashboard-secret.yaml
+        - dashboard-controller.yaml
+        - dashboard-service.yaml
+    - name: copy exec
+      copy:
+        src: /data/k8s_install/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - dashboard.sh
+        - k8s-admin.yaml
+    - name: create config
+      script: /bin/sh /data/k8s/dashboard.sh
+      register: info
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"

@@ -1,0 +1,41 @@
+---
+- hosts: node
+  gather_facts: False
+  tasks:
+    - name: delete dir if exists
+      file:
+        state: absent
+        path: /data/k8s
+    - name: create dir
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /opt/kubernetes/ssl
+    - name: exec
+      copy:
+        src: /data/k8s_install/kubernetes/server/bin/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - kubelet
+        - kube-proxy
+    - name: exec
+      copy:
+        src: /data/k8s_install/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - bootstrap.kubeconfig
+        - kube-proxy.kubeconfig
+        - node.sh
+        - node.py
+    - name: create config
+      script: /bin/sh /data/k8s/node.sh {{host_ip}}
+      register: info
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"

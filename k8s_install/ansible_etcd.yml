@@ -1,0 +1,38 @@
+---
+- hosts: etcd
+  gather_facts: False
+  tasks:
+    - name: delete dir if exists
+      file:
+        state: absent
+        path: /data/k8s
+    - name: create dir
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /data/k8s
+        - /opt/etcd/cfg
+        - /opt/etcd/bin
+        - /opt/etcd/ssl
+    - name: copy k8s install dir
+      copy:
+        src: /data/k8s_install/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - etcd.py
+        - etcd.sh
+        - etcd-v3.2.12-linux-amd64/etcd
+        - etcd-v3.2.12-linux-amd64/etcdctl
+        - ca-key.pem
+        - ca.pem
+        - server-key.pem
+        - server.pem
+    - name: create config
+      script: /bin/sh /data/k8s/etcd.sh {{host_alias}} {{host_ip}} {{hosts_list}} {{alias_list}}
+      register: info
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"

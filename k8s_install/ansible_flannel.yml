@@ -1,0 +1,33 @@
+---
+- hosts: etcd
+  gather_facts: False
+  tasks:
+    - name: delete dir if exists
+      file:
+        state: absent
+        path: /data/k8s
+    - name: create dir
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /opt/kubernetes/cfg
+        - /opt/kubernetes/bin
+        - /opt/kubernetes/ssl
+    - name: copy k8s install dir
+      copy:
+        src: /data/k8s_install/{{ item }}
+        dest: /data/k8s/
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - flanneld
+        - mk-docker-opts.sh
+        - flannel.py
+        - flannel.sh
+    - name: create config
+      script: /bin/sh /data/k8s/flannel.sh {{hosts_list}}
+      register: info
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"

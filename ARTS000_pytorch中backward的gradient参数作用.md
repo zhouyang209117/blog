@@ -148,23 +148,26 @@ print(x3.grad)
 按照上用的推导方法
 $$
 \begin{equation*}
-    [\frac{\partial A}{\partial x_1},\frac{\partial A}{\partial x_2},\frac{\partial A}{\partial x_3}]=
-    [\frac{\partial A}{\partial y_1},\frac{\partial A}{\partial y_2},\frac{\partial A}{\partial y_3}]
+\begin{split}
+    [\frac{\partial A}{\partial x_1},\frac{\partial A}{\partial x_2},\frac{\partial A}{\partial x_3}]
+    &=[\frac{\partial A}{\partial y_1},\frac{\partial A}{\partial y_2},\frac{\partial A}{\partial y_3}]
    \left[
    \begin{matrix}
    x_2x_3 & x_1x_3 & x_1x_2 \\
    1      & 1      & 1      \\
    1      & x_3    & x_2
    \end{matrix}
-   \right]=
-   [0.1,0.2,0.3]
+   \right]
+   &=[0.1,0.2,0.3]
    \left[
    \begin{matrix}
    6 & 3 & 2 \\
    1 & 1 & 1 \\
    1 & 3 & 2
    \end{matrix}
-   \right]=[1.1,1.4,1.0]
+   \right]
+   &=[1.1,1.4,1.0]
+\end{split}
 \end{equation*}
 $$
 和代码的运行结果是一样的.

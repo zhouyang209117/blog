@@ -1,1 +1,1 @@
-[这是一个测试](http://www.google.com/)
+[这是一个测试](k8s_install/这是一个测试.md)

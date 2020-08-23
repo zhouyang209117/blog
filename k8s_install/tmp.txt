@@ -1,5 +1,0 @@
-/opt/etcd/bin/etcd                                          \
---name=etcd1                                                \
---data-dir=/data/etcd_dir                                          \
---listen-client-urls=http://10.13.84.142:6404 \
---advertise-client-urls=http://10.13.84.142:6404

@@ -27,7 +27,7 @@ file_path = "/Users/zhouyang3/ds/train-images-idx3-ubyte"
 with open(file_path, 'rb') as f:
     buf = f.read()
     index = 0
-    magic, numImages, numRows, numColumns = struct.unpack_from('>IIII', buf, index)  # 读取前4个字节的内容
+    magic, numImages, numRows, numColumns = struct.unpack_from('>IIII', buf, index)
     size = numImages * numRows * numColumns
     index += struct.calcsize('>IIII')
     im = struct.unpack_from('>{}B'.format(size), buf, index)

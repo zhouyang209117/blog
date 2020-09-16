@@ -37,6 +37,6 @@ with open(file_path, 'rb') as f:
         im.save("./mnist/{}.png".format(i))
 ```
 ## 参考资料
-1. [mnist官方文档](!http://yann.lecun.com/exdb/mnist/)
-1. [python读取,显示，保存mnist图片](!https://www.cnblogs.com/zhouyang209117/p/6436751.html)
-1. [pillow Modes](!https://pillow.readthedocs.io/en/4.2.x/handbook/concepts.html#concept-modes)
+1. [mnist官方文档](http://yann.lecun.com/exdb/mnist/)
+1. [python读取,显示，保存mnist图片](https://www.cnblogs.com/zhouyang209117/p/6436751.html)
+1. [pillow Modes](https://pillow.readthedocs.io/en/4.2.x/handbook/concepts.html#concept-modes)

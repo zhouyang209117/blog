@@ -10,7 +10,7 @@ pytorch官方文档的命令装一两天都有装不上.这里总结了一个步
    conda activate pytorch1.7.0
    conda install pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch
    ```
-我买的云主机在德国,十几分钟就安装好了,再也不用配制conda的源了.
+   我买的云主机在德国,十几分钟就安装好了,再也不用配制conda的源了.
 1. pytorch被安装到了$CONDA_HOME/envs/pytorch1.7.0目录下. 把pytorch1.7.0目录打包成压缩包,压缩包有2G多.
 1. 用scp命令把压缩包拖到本地,这个过程比较漫长,我大概弄了两三个小时. 成功后解压到本地的$CONDA_HOME/envs/pytorch1.7.0目录.
 1. 修改$CONDA_HOME/envs/pytorch1.7.0/bin/pip文件,把第1行python的位置修改成和本地机一致(之前是云主机的).之后就可以按

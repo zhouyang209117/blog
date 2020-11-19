@@ -17,6 +17,6 @@ conda install pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch
 以前的方法使用pytorch1.7.0环境了.
 1. 比较绕的方法,没有办法的办法.没有办法情况下的“最佳实践”
 ## 参考资料
-[pytorch官方文档](https://pytorch.org/)
-[conda国内源官网](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
+[pytorch官方文档](https://pytorch.org/)  
+[conda国内源官网](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)  
 [miniconda官网](https://docs.conda.io/en/latest/miniconda.html)

@@ -111,4 +111,4 @@ sudo chown -R zhou.zhou /data1
 * 如果对想/dev/sdb分多个区,流程基本相同,不同的是填Last sector不能填默认.假定要分2个区,第1个10G,第2个剩下所有.Last sector应填+10G
 之后用w保存,然后再输入n新建下一个分区.之后操作步骤都是相同的.
 ## 参考资料
-[buntu下添加硬盘，分区以及自动挂载](https://www.jianshu.com/p/ec5579ef15a6)
+[ubuntu下添加硬盘，分区以及自动挂载](https://www.jianshu.com/p/ec5579ef15a6)

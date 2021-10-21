@@ -8,3 +8,4 @@
 1. [ubuntu新建用户](content/ubuntu新建用户.md)<br/>
 1. [目标检测标准mAP原理](content/20201128目标检测标准mAP原理.md)<br/>
 1. [asp.net hello world](content/20210909dotnet-helloworld.md)<br/>
+1. [typescript hello world](content/2021021ts-helloworld.md)<br/>
